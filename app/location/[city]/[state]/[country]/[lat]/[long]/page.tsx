@@ -50,10 +50,8 @@ const WeatherPage = async ({
   //   },
   //   body: JSON.stringify({ weatherData: dataToSend }),
   // });
-  // // console.log("res", res.json());
 
   // const GPTData = await res.json();
-  // console.log("GPTData", GPTData);
   // const { content } = GPTData;
   const content = "GPT SUmmary Placeholder";
   return (
