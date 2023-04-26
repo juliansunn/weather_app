@@ -14,22 +14,22 @@ const TempChart = ({ results }: Props) => {
   const data = hourly
     .map((hour, i) => ({
       time: Number(hour),
-      "Wind Speed (m/s)": results.hourly.windspeed_80m[i],
+      "Wind Speed (mph)": results.hourly.windspeed_80m[i],
       "Temperature (F)": results.hourly.temperature_2m[i],
     }))
     .slice(0, 24);
 
   const dataFormatter = (value: number) => `${value} °F`;
   return (
-    <Card>
+    <Card className="bg-gray-200">
       <Title>Temp & UV Index</Title>
       <AreaChart
-        className="mt-6"
+        className="mt-5"
         data={data}
         showLegend
         index="time"
-        categories={["Temperature (F)", "Wind Speed (m/s)"]}
-        colors={["yellow", "rose"]}
+        categories={["Temperature (F)", "Wind Speed (mph)"]}
+        colors={["cyan", "rose"]}
         minValue={0}
         valueFormatter={dataFormatter}
         yAxisWidth={40}

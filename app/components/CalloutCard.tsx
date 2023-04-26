@@ -11,7 +11,7 @@ type Props = {
 const CalloutCard = ({ message, warning }: Props) => {
   return (
     <Callout
-      className="mt-4"
+      className="mt-4 text-xl"
       title={message}
       icon={warning ? ExclamationIcon : CheckCircleIcon}
       color={warning ? "rose" : "teal"}

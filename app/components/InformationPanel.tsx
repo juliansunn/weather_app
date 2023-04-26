@@ -21,19 +21,23 @@ const InformationPanel = ({
   long,
   results,
 }: Props) => {
+  console.log("results.daily.sunrise[0]", results.timezone);
   return (
     <div className="bg-gradient-to-br from-sky-800 to-sky-900 text-white p-10">
       <div className="pb-5">
         <h1 className="text-6xl font-bold">
           {decodeURI(city)}, {decodeURI(state)}, {decodeURI(country)}
         </h1>
-        <p className="text-xs text-gray-400">
+        <p className="text-xs text-gray-400 mt-2">
           Lat/Long: {lat}, {long}
         </p>
       </div>
       <CityPicker />
       <hr className="my-10" />
-      <div className="mt-5 flex items-center justify-between space-x-10 mb-5">
+      <h2 className="mt-5 text-2xl font-bold underline">
+        Your Current Location
+      </h2>
+      <div className="flex items-center justify-between space-x-10 mb-5 text-gray-300">
         <div>
           <p className="text-xl">
             {new Date().toLocaleDateString("en-US", {
@@ -49,7 +53,33 @@ const InformationPanel = ({
         </div>
 
         <p className="text-xl font-bold uppercase">
-          {new Date().toLocaleDateString("en-US", {
+          {new Date().toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          })}
+        </p>
+      </div>
+      <hr className="my-10" />
+      <h2 className="mt-5 text-2xl font-bold underline">
+        {`In ${city}, ${state}, ${country}`}
+      </h2>
+      <div className="flex items-center justify-between space-x-10 mb-5 text-gray-300">
+        <div>
+          <p className="text-xl">
+            {new Date().toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+          <p className="font-extralight">Timezone: {results.timezone}</p>
+        </div>
+
+        <p className="text-xl font-bold uppercase">
+          {new Date().toLocaleTimeString("en-US", {
+            timeZone: results.timezone,
             hour: "numeric",
             minute: "numeric",
             hour12: true,

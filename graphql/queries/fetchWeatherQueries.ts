@@ -92,6 +92,7 @@ const fetchWeatherQuery = gql`
       latitude
       longitude
       timezone
+      timezone_abbreviation
     }
   }
 `;

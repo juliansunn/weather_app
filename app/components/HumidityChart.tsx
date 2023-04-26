@@ -20,7 +20,7 @@ const HumidityChart = ({ results }: Props) => {
 
   const dataFormatter = (value: number) => `${value}`;
   return (
-    <Card>
+    <Card className="bg-gray-200">
       <Title>Humidity</Title>
       <AreaChart
         className="mt-6"

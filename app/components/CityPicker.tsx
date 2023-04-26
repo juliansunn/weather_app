@@ -161,9 +161,8 @@ const CityPicker = () => {
           onChange={handleSelectedCountry}
         />
       </div>
-      {}
       {stateOptions.length !== 0 && (
-        <div className="space-y-4">
+        <div className="space-y-4 mt-4">
           <div className="flex items-center space-x-2">
             <GlobeIcon className="h-5 w-5 text-white" />
             <label htmlFor="city">State</label>

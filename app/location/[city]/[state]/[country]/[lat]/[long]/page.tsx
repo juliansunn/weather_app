@@ -1,13 +1,12 @@
 import { getClient } from "@/apollo-client";
 import CalloutCard from "@/app/components/CalloutCard";
-import HumidityChart from "@/app/components/HumidityChart";
 import InformationPanel from "@/app/components/InformationPanel";
-import RainChart from "@/app/components/RainChart";
 import StatCard from "@/app/components/StatCard";
-import TempChart from "@/app/components/TempChart";
 import fetchWeatherQuery from "@/graphql/queries/fetchWeatherQueries";
 import cleanData from "@/lib/cleanData";
 import getBasePath from "@/lib/getBasePath";
+import getWindDirection from "@/lib/getWindDirection";
+import Charts from "@/app/components/Charts";
 
 // revalidate cached queries every 60 seconds
 export const revalidate = 60;
@@ -33,7 +32,7 @@ const WeatherPage = async ({
       current_weather: "true",
       longitude: long,
       latitude: lat,
-      timezone: "PST",
+      timezone: "auto",
       temperature_unit: "fahrenheit",
     },
   });
@@ -41,7 +40,7 @@ const WeatherPage = async ({
   const results: Root = data.myQuery;
   const uvIndexMax: number = Number(results.daily.uv_index_max[0]);
 
-  const dataToSend = cleanData(results, city);
+  // const dataToSend = cleanData(results, city);
 
   // const res = await fetch(`${getBasePath()}/api/getWeatherSummary`, {
   //   method: "POST",
@@ -53,9 +52,9 @@ const WeatherPage = async ({
 
   // const GPTData = await res.json();
   // const { content } = GPTData;
-  const content = "GPT SUmmary Placeholder";
+  const content = "GPT Summary Placeholder";
   return (
-    <div className="flex flex-col min-h-screen md:flex-row">
+    <div className="flex flex-col min-h-screen md:flex-row bg-sky-700">
       <InformationPanel
         city={city}
         state={state}
@@ -66,18 +65,18 @@ const WeatherPage = async ({
       />
 
       <div className="flex-1 p-5 lg:p-10">
-        <div className="p-5">
+        <div className="pb-5">
           <div className="pb-5">
-            <h2 className="text-2xl font-bold">Todays Overview</h2>
+            <h2 className="text-2xl font-bold text-white">Todays Overview</h2>
             <p className="text-sm text-gray-400">
               Last Updated at:{" "}
               {new Date(results.current_weather.time).toLocaleString()}
             </p>
           </div>
-          <div className="m-2 mb-10">
+          <div className="mb-10">
             <CalloutCard message={content} warning={false} />
           </div>
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 m-2">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             <StatCard
               title="Max. Temperature"
               metric={`${Number(results.daily.temperature_2m_max[0]).toFixed(
@@ -105,27 +104,20 @@ const WeatherPage = async ({
                 />
               )}
             </div>
-            <div className="flex space-3">
-              <StatCard
-                title="Wind Speed"
-                metric={`${results.current_weather.windspeed.toFixed(1)} m/s`}
-                color="green"
-              />
-              <StatCard
-                title="Wind Direction"
-                metric={`${results.current_weather.winddirection.toFixed(1)}°`}
-                color="green"
-              />
-            </div>
+            <StatCard
+              title="Wind Direction & Speed"
+              metric={`${getWindDirection(
+                results.current_weather.winddirection.toFixed(1)
+              )} @ ${results.current_weather.windspeed.toFixed(1)} mph`}
+              color="green"
+            />
           </div>
         </div>
 
         <hr className="mb-5" />
 
         <div className="space-y-3">
-          <TempChart results={results} />
-          <RainChart results={results} />
-          <HumidityChart results={results} />
+          <Charts results={results} />
         </div>
       </div>
     </div>

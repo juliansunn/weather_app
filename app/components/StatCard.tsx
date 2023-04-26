@@ -10,9 +10,13 @@ type Props = {
 
 const StatCard = ({ title, metric, color }: Props) => {
   return (
-    <Card decoration="top" decorationColor={color}>
-      <Text>{title}</Text>
-      <Metric>{metric}</Metric>
+    <Card
+      className="bg-gradient-to-l from-sky-900 to-sky-800"
+      decoration="top"
+      decorationColor={color}
+    >
+      <Text className="text-slate-400">{title}</Text>
+      <Metric className="text-white">{metric}</Metric>
     </Card>
   );
 };
