@@ -33,59 +33,6 @@ const InformationPanel = ({
         </p>
       </div>
       <CityPicker />
-      <hr className="my-10" />
-      <h2 className="mt-5 text-2xl font-bold underline">
-        Your Current Location
-      </h2>
-      <div className="flex items-center justify-between space-x-10 mb-5 text-gray-300">
-        <div>
-          <p className="text-xl">
-            {new Date().toLocaleDateString("en-US", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
-          <p className="font-extralight">
-            Timezone: {Intl.DateTimeFormat().resolvedOptions().timeZone}
-          </p>
-        </div>
-
-        <p className="text-xl font-bold uppercase">
-          {new Date().toLocaleTimeString("en-US", {
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true,
-          })}
-        </p>
-      </div>
-      <hr className="my-10" />
-      <h2 className="mt-5 text-2xl font-bold underline">
-        {`In ${city}, ${state}, ${country}`}
-      </h2>
-      <div className="flex items-center justify-between space-x-10 mb-5 text-gray-300">
-        <div>
-          <p className="text-xl">
-            {new Date().toLocaleDateString("en-US", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
-          <p className="font-extralight">Timezone: {results.timezone}</p>
-        </div>
-
-        <p className="text-xl font-bold uppercase">
-          {new Date().toLocaleTimeString("en-US", {
-            timeZone: results.timezone,
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true,
-          })}
-        </p>
-      </div>
       <hr className="mt-10 mb-5" />
       <div>
         <div>
@@ -135,6 +82,59 @@ const InformationPanel = ({
             </p>
           </div>
         </div>
+      </div>
+      <hr className="my-10" />
+      <h2 className="mt-5 text-2xl font-bold underline">
+        Your Current Location
+      </h2>
+      <div className="flex items-center justify-between space-x-10 mb-5 text-gray-300">
+        <div>
+          <p className="text-xl">
+            {new Date().toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+          <p className="font-extralight">
+            Timezone: {Intl.DateTimeFormat().resolvedOptions().timeZone}
+          </p>
+        </div>
+
+        <p className="text-xl font-bold uppercase">
+          {new Date().toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          })}
+        </p>
+      </div>
+      <hr className="my-10" />
+      <h2 className="mt-5 text-2xl font-bold underline">
+        {`In ${decodeURI(city)}, ${decodeURI(state)} - ${decodeURI(country)}`}
+      </h2>
+      <div className="flex items-center justify-between space-x-10 mb-5 text-gray-300">
+        <div>
+          <p className="text-xl">
+            {new Date().toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+          <p className="font-extralight">Timezone: {results.timezone}</p>
+        </div>
+
+        <p className="text-xl font-bold uppercase">
+          {new Date().toLocaleTimeString("en-US", {
+            timeZone: results.timezone,
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          })}
+        </p>
       </div>
     </div>
   );

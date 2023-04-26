@@ -82,14 +82,14 @@ const WeatherPage = async ({
               metric={`${Number(results.daily.temperature_2m_max[0]).toFixed(
                 1
               )} °F`}
-              color="yellow"
+              color="indigo"
             />
             <StatCard
               title="Min. Temperature"
               metric={`${Number(results.daily.temperature_2m_min[0]).toFixed(
                 1
               )} °F`}
-              color="green"
+              color="cyan"
             />
             <div>
               <StatCard
@@ -97,7 +97,7 @@ const WeatherPage = async ({
                 metric={uvIndexMax.toFixed(1)}
                 color="red"
               />
-              {uvIndexMax > 5 && (
+              {uvIndexMax > 7 && (
                 <CalloutCard
                   message="The UV is high today, please be sure to wear sunscreen"
                   warning
@@ -109,7 +109,7 @@ const WeatherPage = async ({
               metric={`${getWindDirection(
                 results.current_weather.winddirection.toFixed(1)
               )} @ ${results.current_weather.windspeed.toFixed(1)} mph`}
-              color="green"
+              color="zinc"
             />
           </div>
         </div>
